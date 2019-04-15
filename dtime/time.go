@@ -14,3 +14,7 @@ func GetNowDateTime() string {
 func GetDate() string {
 	return time.Now().Format("2006-01-02")
 }
+
+func GetIntTime() int {
+	return int(time.Now().Unix())
+}

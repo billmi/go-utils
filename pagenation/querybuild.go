@@ -1,8 +1,4 @@
-package querybuild
-
-import (
-	"demo/utils/pagenation"
-)
+package pagenation
 
 /**
 	翻页与汇总SQL生成器
@@ -20,7 +16,7 @@ const(
 func QueryBuild(querySql string,currPage int,usePage bool) string{
 	var sql string
 	if usePage == true{
-		sql = querySql + pagenation.PagenationParse(currPage,ListRow)
+		sql = querySql + PagenationParse(currPage,ListRow)
 	}
 	return sql
 }
