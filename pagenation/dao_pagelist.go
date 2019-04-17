@@ -5,6 +5,7 @@ import (
 	"reflect"
 	"strings"
 	"github.com/go-xorm/xorm"
+	"strconv"
 )
 
 type DaoBase struct {
@@ -39,10 +40,12 @@ func (DaoBase *DaoBase) GetPageLists(po interface{}, table string, pk string, co
 	var _order = ""
 	var orderCmd = " ORDER BY "
 	var _pk = "`id`"
+	var count = 0
 	if pk == "" {
 		_pk = pk
 	}
 	var querySql = fmt.Sprintf("SELECT %s FROM %s WHERE 1 ", _fields, table)
+	var countSql = fmt.Sprintf("SELECT count(%s) AS count FROM %s WHERE 1 ", pk, table)
 	var condi = " "
 	if condition != "" {
 		condi = condition
@@ -57,19 +60,22 @@ func (DaoBase *DaoBase) GetPageLists(po interface{}, table string, pk string, co
 		_page = page
 	}
 	querySql = querySql + condi + _order
+	countSql = countSql + condi
 	var handler = DaoBase.GetDatasource()
-	defer handler.Close()
-	count, _ := handler.SQL(QueryBuild(querySql, _page, true)).FindAndCount(po)
+	countRes, _ := handler.QueryString(countSql)
+	handler.SQL(QueryBuild(querySql, _page, true)).Find(po)
 	var resData = make(map[string]interface{}, 0)
+	count, _ = strconv.Atoi(countRes[0]["count"])
 	if count > 0 {
-		resData["list"] = make([]int, 0)
-	} else {
 		resData["list"] = po
+	} else {
+		resData["list"] = make([]int, 0)
 	}
-	var pageInfo = CommaPaginator(_page, listRow, count)
+	var pageInfo = CommaPaginator(_page, listRow, int64(count))
 	resData["total_page"] = pageInfo["total_page"]
 	resData["curr_page"] = pageInfo["curr_page"]
 	resData["page_rows"] = pageInfo["page_rows"]
+	resData["total_record"] = count
 	return resData
 }
 
@@ -79,7 +85,6 @@ func (DaoBase *DaoBase) GetPageLists(po interface{}, table string, pk string, co
  */
 func (DaoBase *DaoBase) GetLists(po interface{}, table string, pk string, condition string, order string) map[string]interface{} {
 	var _fields = "*"
-	var _page = 0
 	var _order = ""
 	var orderCmd = " ORDER BY "
 	var _pk = "`id`"
@@ -98,14 +103,9 @@ func (DaoBase *DaoBase) GetLists(po interface{}, table string, pk string, condit
 	}
 	querySql = querySql + condi + _order
 	var handler = DaoBase.GetDatasource()
-	defer handler.Close()
-	count, _ := handler.SQL(QueryBuild(querySql, _page, true)).FindAndCount(po)
+	handler.SQL(querySql).Find(po)
 	var resData = make(map[string]interface{}, 0)
-	if count > 0 {
-		resData["list"] = make([]int, 0)
-	} else {
-		resData["list"] = po
-	}
+	resData["list"] = po
 	return resData
 }
 
