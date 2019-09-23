@@ -2,52 +2,48 @@ package savelog
 
 import (
 	"fmt"
-	"demo/utils/json"
-	"log"
 	"os"
-	"time"
+	"log"
+	"encoding/json"
 )
-
 
 /**
 	自定义写日志
     author Bill
  */
 var sufferFix = ".log"
-var nowDateTime = time.Now().Format("2006-01-02 15:04:05")
-var nowDate = time.Now().Format("2006-01-02")
 
-func writeLog(logFileName string, custPrefix string, message string, logData interface{}) {
-	if IsExist(nowDate) == false {
-		os.Mkdir(nowDate, 0775)
+func WriteLog(dir string, logFileName string, logData map[string]interface{}) {
+	var logFilePath = dir + "/" + logFileName + sufferFix
+	var Mkdir = dir
+	if IsExist(Mkdir) == false {
+		os.Mkdir(Mkdir, 0775)
 	}
-	var logFilePath = nowDate + "/" + logFileName + "_" + nowDate + sufferFix
-	logFile, err := os.OpenFile(logFilePath, os.O_CREATE|os.O_APPEND, 0775)
+	logFile, err := os.OpenFile(logFilePath, os.O_CREATE|os.O_APPEND|os.O_RDWR, 0775)
 	if err != nil {
-		log.Panicln("error : %s ,fileName : %s", err, logFileName)
-		fmt.Print("%s",err)
+		fmt.Println(err.Error())
 	}
 	defer logFile.Close()
 	if err != nil {
-		log.Panicln("open file error")
-		fmt.Print("%s",err)
+		fmt.Println(err.Error())
 	}
-	perfix := fmt.Sprintf("[%s]", custPrefix)
-	ErrorLog := log.New(logFile, perfix, log.Llongfile)
-	var dataLog string
-	if logData != "" {
-		dataLog, _ = json.ToJsonString(logData)
-	}
-	errMsg := fmt.Sprintf("Msg : %s , Data: %s , Date : %s", message, dataLog, nowDateTime) //时间点无法修改
-	ErrorLog.Println(errMsg)
+	Log := log.New(logFile, "", log.LstdFlags)
+
+	Msg := fmt.Sprintf(" %s ", ToJsonString(logData))
+	Log.Println(Msg)
 }
 
-func WriteErrorLog(logFileName string, message string, logData interface{}) {
-	writeLog(logFileName, "Error", message, logData)
-}
+/**
+    JSON (map转json)
+    @author Bill
+*/
 
-func WriteInfoLog(logFileName string, message string, logData interface{}) {
-	writeLog(logFileName, "Info", message, logData)
+func ToJsonString(data map[string]interface{}) string {
+	jsonData, err := json.Marshal(data)
+	if err != nil {
+		return ""
+	}
+	return string(jsonData)
 }
 
 func IsExist(path string) bool {
