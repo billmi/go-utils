@@ -29,7 +29,7 @@ func WriteLog(dir string, logFileName string, logData map[string]interface{}) {
 	}
 	Log := log.New(logFile, "", log.LstdFlags)
 
-	Msg := fmt.Sprintf(" %s ", ToJsonString(logData))
+	Msg := fmt.Sprintf(" %s ", _toJsonString(logData))
 	Log.Println(Msg)
 }
 
@@ -38,7 +38,7 @@ func WriteLog(dir string, logFileName string, logData map[string]interface{}) {
     @author Bill
 */
 
-func ToJsonString(data map[string]interface{}) string {
+func _toJsonString(data map[string]interface{}) string {
 	jsonData, err := json.Marshal(data)
 	if err != nil {
 		return ""
