@@ -8,7 +8,7 @@ import (
 
 /*
 	用获取http协议ip操作
-	Author  Bill 
+	Author  Bill
  */
 
 const (
