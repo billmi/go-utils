@@ -2,8 +2,7 @@ package respo
 
 import (
 	"time"
-	"fmt"
-	json2 "commaai.cn/commams-oauth/extend/tools/json"
+	"encoding/json"
 )
 
 const (
@@ -36,24 +35,14 @@ func ResToJsonString(msg string, data interface{}, errorCode int) string {
 		resultData["data"] = responseEmpty{}
 	}
 	resultData["timestamp"] = time.Now().Format("2006-01-02 15:04:05")
-	res, err := ToJsonString(resultData)
-	if err != nil {
-		fmt.Print(err)
-	}
+	res := _toJsonString(resultData)
 	return res
 }
 
-
-/**
-    JSON (map转json,包无依赖性，直接copy过来了)
-    @author Bill
-*/
-
-func ToJsonString(data map[string]interface{}) (string, error) {
+func _toJsonString(data map[string]interface{}) (string) {
 	jsonData, err := json.Marshal(data)
 	if err != nil {
-		log.Error("errro : %s", err)
-		return "", err
+		return ""
 	}
-	return string(jsonData), err
+	return string(jsonData)
 }

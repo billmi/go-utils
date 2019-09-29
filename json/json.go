@@ -1,7 +1,6 @@
 package json
 
 import (
-	"github.com/gpmgo/gopm/modules/log"
 	"encoding/json"
 )
 
@@ -10,13 +9,12 @@ import (
     @author Bill
 */
 
-func ToJsonString(data map[string]interface{}) (string, error) {
+func ToJsonString(data map[string]interface{}) (string) {
 	jsonData, err := json.Marshal(data)
 	if err != nil {
-		log.Error("errro : %s", err)
-		return "", err
+		return ""
 	}
-	return string(jsonData), err
+	return string(jsonData)
 }
 
 /*
