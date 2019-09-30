@@ -26,10 +26,10 @@ func Dmp() {
 	}
 
 	errstr += (string(debug.Stack())) //输出堆栈信息
-	OnPrintErr(errstr)
+	OnWriteErrToFile(errstr)
 }
 
-func OnPrintErr(errstring string) {
+func OnWriteErrToFile(errstring string) {
 	path := GetModelPath() + "/err"
 	if !PathExists(path) {
 		os.MkdirAll(path, os.ModePerm) //生成多级目录
