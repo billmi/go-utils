@@ -1,4 +1,4 @@
-package arr
+package array
 
 //合并数组
 func Copy(dest []interface{}, src []interface{}) (result []interface{}) {

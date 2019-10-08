@@ -1,4 +1,4 @@
-package str
+package dstring
 
 //反转字符串
 func Reverse(s string) string {

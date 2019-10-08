@@ -1,4 +1,4 @@
-package rand
+package drand
 
 import (
 	"bytes"
