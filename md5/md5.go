@@ -6,8 +6,8 @@ import (
 )
 
 /**
-    md5
-    @author Bill
+  md5
+  @author Bill
 */
 
 func Md5EnCode(string string) string {

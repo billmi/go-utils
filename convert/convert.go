@@ -5,9 +5,9 @@ import (
 	"encoding/gob"
 	"encoding/json"
 	"fmt"
+	"github.com/xxjwxc/public/mylog"
 	"strconv"
 	"time"
-	"github.com/xxjwxc/public/mylog"
 )
 
 type RawBytes []byte

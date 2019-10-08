@@ -2,13 +2,13 @@ package aes
 
 import (
 	"bytes"
-	"crypto/cipher"
 	"crypto/aes"
+	"crypto/cipher"
 )
 
 /**
-    Aes加解密
-    @author Bill
+  Aes加解密
+  @author Bill
 */
 
 func AesEncrypt(origData, key []byte) ([]byte, error) {

@@ -1,8 +1,8 @@
 package respo
 
 import (
-	"time"
 	"encoding/json"
+	"time"
 )
 
 const (
@@ -15,9 +15,9 @@ const (
 type responseEmpty struct{}
 
 /**
-	此包按需求修改使用
-	@author Bill
- */
+此包按需求修改使用
+@author Bill
+*/
 func ResToJsonString(msg string, data interface{}, errorCode int) string {
 	message := msg
 	if message == "" {
@@ -39,7 +39,7 @@ func ResToJsonString(msg string, data interface{}, errorCode int) string {
 	return res
 }
 
-func _toJsonString(data map[string]interface{}) (string) {
+func _toJsonString(data map[string]interface{}) string {
 	jsonData, err := json.Marshal(data)
 	if err != nil {
 		return ""

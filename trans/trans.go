@@ -2,8 +2,6 @@ package trans
 
 import "reflect"
 
-
-
 //结构体转map
 func Struct2Map(obj interface{}) map[string]interface{} {
 	t := reflect.TypeOf(obj)

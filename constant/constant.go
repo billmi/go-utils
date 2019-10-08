@@ -1,8 +1,8 @@
 package constant
 
 /**
-    常量
-    @author Bill
+  常量
+  @author Bill
 */
 
 const (

@@ -1,16 +1,16 @@
 package savelog
 
 import (
-	"fmt"
-	"os"
-	"log"
 	"encoding/json"
+	"fmt"
+	"log"
+	"os"
 )
 
 /**
 	自定义写日志
     author Bill
- */
+*/
 var sufferFix = ".log"
 
 func WriteLog(dir string, logFileName string, logData map[string]interface{}) {
@@ -34,8 +34,8 @@ func WriteLog(dir string, logFileName string, logData map[string]interface{}) {
 }
 
 /**
-    JSON (map转json)
-    @author Bill
+  JSON (map转json)
+  @author Bill
 */
 
 func _toJsonString(data map[string]interface{}) string {

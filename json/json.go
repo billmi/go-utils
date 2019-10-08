@@ -5,11 +5,11 @@ import (
 )
 
 /**
-    JSON (map转json)
-    @author Bill
+  JSON (map转json)
+  @author Bill
 */
 
-func ToJsonString(data map[string]interface{}) (string) {
+func ToJsonString(data map[string]interface{}) string {
 	jsonData, err := json.Marshal(data)
 	if err != nil {
 		return ""
@@ -19,7 +19,7 @@ func ToJsonString(data map[string]interface{}) (string) {
 
 /*
 	泛型比较麻烦,单独做一个
- */
+*/
 func Struct2Json(data interface{}) (string, error) {
 	jsonData, err := json.Marshal(data)
 	if err != nil {
@@ -29,8 +29,8 @@ func Struct2Json(data interface{}) (string, error) {
 }
 
 /**
-    JSON (json转map)
-    @author Bill
+  JSON (json转map)
+  @author Bill
 */
 func StringToJson(data string) map[string]interface{} {
 	var jsonData map[string]interface{}
@@ -41,7 +41,7 @@ func StringToJson(data string) map[string]interface{} {
 /**
 	JSONstring (json转IntList)
     @author Bill
- */
+*/
 func ToIntList(data string) []int {
 	var tmp = make([]int, 0)
 	json.Unmarshal([]byte(data), &tmp)

@@ -1,11 +1,9 @@
 package sign
 
-
-
 /**
-    身份证手机号填充
-    author Bill
- */
+  身份证手机号填充
+  author Bill
+*/
 
 func SignIdcard(idcard string) string {
 	cp := idcard

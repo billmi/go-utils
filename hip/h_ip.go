@@ -1,15 +1,15 @@
 package hip
 
 import (
-"encoding/binary"
-"net"
-"net/http"
+	"encoding/binary"
+	"net"
+	"net/http"
 )
 
 /*
 	用获取http协议ip操作
 	Author  Bill
- */
+*/
 
 const (
 	XForwardedFor = "X-Forwarded-For"

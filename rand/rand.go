@@ -1,18 +1,16 @@
 package rand
 
 import (
-	"sync"
 	"bytes"
-	"time"
 	"math/rand"
+	"sync"
+	"time"
 )
-
-
 
 /**
 	随机数,随机字符串生成
     author Bill
- */
+*/
 
 var (
 	randSeek = int64(1)
@@ -29,14 +27,14 @@ func GetRandomSring(num int, str ...string) string {
 	var buf bytes.Buffer
 	for i := 0; i < num; i++ {
 		x := r.Intn(l)
-		buf.WriteString(s[x: x+1])
+		buf.WriteString(s[x : x+1])
 	}
 	return buf.String()
 }
 
-func GetRandomChars(num int)  string {
+func GetRandomChars(num int) string {
 	ss := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	return GetRandomSring(num,ss)
+	return GetRandomSring(num, ss)
 }
 
 func getRandSeek() int64 {

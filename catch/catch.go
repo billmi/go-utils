@@ -3,10 +3,10 @@ package catch
 import (
 	"fmt"
 	"os"
-	"time"
 	"os/exec"
 	"path/filepath"
 	"runtime/debug"
+	"time"
 )
 
 /*
@@ -26,7 +26,7 @@ func Dmp() {
 	}
 
 	errstr += (string(debug.Stack())) //输出堆栈信息
-	OnWriteErrToFile(errstr)
+	//OnWriteErrToFile(errstr)
 }
 
 func OnWriteErrToFile(errstring string) {
@@ -61,7 +61,7 @@ func GetModelPath() string {
 	return path
 }
 
-func PathExists(path string) (bool) {
+func PathExists(path string) bool {
 	_, err := os.Stat(path)
 	if err == nil {
 		return true

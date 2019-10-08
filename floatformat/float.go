@@ -6,10 +6,9 @@ import (
 )
 
 /**
-    浮点这里需要仔细看!!!
-    @author Bill
+  浮点这里需要仔细看!!!
+  @author Bill
 */
-
 
 func Float64ToString(f float64) string {
 	return fmt.Sprintf("%g", f)
@@ -31,4 +30,3 @@ func Float64Rand(v float64, dig int) float64 {
 func FloatToFDig(floVal float64, dig int) string {
 	return fmt.Sprintf("%10."+strconv.Itoa(dig)+"f", floVal) //十位整数，8位小数
 }
-

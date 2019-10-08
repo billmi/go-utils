@@ -1,19 +1,19 @@
 package file
 
 import (
-	"os"
 	"io/ioutil"
+	"os"
 	"path"
 	"path/filepath"
 	"strings"
 )
 
 /**
-    文件存在检测
-    @author Bill
+  文件存在检测
+  @author Bill
 */
 
-func PathExists(path string) (bool) {
+func PathExists(path string) bool {
 	_, err := os.Stat(path)
 	if err == nil {
 		return true
@@ -25,22 +25,22 @@ func PathExists(path string) (bool) {
 }
 
 /**
-    创建目录
-    @author Bill
+  创建目录
+  @author Bill
 */
 func BuildDir(abs_dir string) error {
 	return os.MkdirAll(path.Dir(abs_dir), os.ModePerm) //生成多级目录
 }
 
 /**
-    删除文件或文件夹
+  删除文件或文件夹
 */
 func DeleteFile(abs_dir string) error {
 	return os.RemoveAll(abs_dir)
 }
 
 /**
-    获取目录所有文件夹
+  获取目录所有文件夹
 */
 func GetPathDirs(abs_dir string) (re []string) {
 	if PathExists(abs_dir) {
@@ -55,7 +55,7 @@ func GetPathDirs(abs_dir string) (re []string) {
 }
 
 /**
-    获取目录所有文件
+  获取目录所有文件
 */
 func GetPathFiles(abs_dir string) (re []string) {
 	if PathExists(abs_dir) {
@@ -68,7 +68,6 @@ func GetPathFiles(abs_dir string) (re []string) {
 	}
 	return
 }
-
 
 /*
 	获取程序运行路径

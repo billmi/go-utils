@@ -3,19 +3,19 @@ package helastic
 import (
 	"context"
 	"encoding/json"
-	"log"
 	"errors"
+	"github.com/olivere/elastic"
+	"log"
 	"reflect"
 	"strings"
 	"time"
-	"github.com/olivere/elastic"
 )
 
 /**
-	base of :  github.com/olivere/elastic
+base of :  github.com/olivere/elastic
 
-	Author : Not Mine...
- */
+Author : Not Mine...
+*/
 
 //
 type MyElastic struct {

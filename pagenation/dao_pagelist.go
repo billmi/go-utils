@@ -2,10 +2,10 @@ package pagenation
 
 import (
 	"fmt"
-	"reflect"
-	"strings"
 	"github.com/go-xorm/xorm"
+	"reflect"
 	"strconv"
+	"strings"
 )
 
 type DaoBase struct {
@@ -13,27 +13,27 @@ type DaoBase struct {
 }
 
 /**
-	这里使用xorm引擎
-	"github.com/go-xorm/xorm"
-	_ "github.com/go-sql-driver/mysql"
- */
+这里使用xorm引擎
+"github.com/go-xorm/xorm"
+_ "github.com/go-sql-driver/mysql"
+*/
 func (DaoBase *DaoBase) GetDatasource() *xorm.Engine {
 	return DaoBase.Datasource
 }
 
 /**
-	这里使用xorm引擎
-	"github.com/go-xorm/xorm"
-	_ "github.com/go-sql-driver/mysql"
- */
+这里使用xorm引擎
+"github.com/go-xorm/xorm"
+_ "github.com/go-sql-driver/mysql"
+*/
 func (DaoBase *DaoBase) SetDatasource(datasource *xorm.Engine) {
 	DaoBase.Datasource = datasource
 }
 
 /**
-	分页
-	注意 ： 连接需要传入datasource
- */
+分页
+注意 ： 连接需要传入datasource
+*/
 func (DaoBase *DaoBase) GetPageLists(po interface{}, table string, pk string, condition string, order string, page int, listRow int) map[string]interface{} {
 	var _fields = "*"
 	var _page = 0
@@ -80,9 +80,9 @@ func (DaoBase *DaoBase) GetPageLists(po interface{}, table string, pk string, co
 }
 
 /**
-	不分页
-	注意 ： 连接需要传入datasource
- */
+不分页
+注意 ： 连接需要传入datasource
+*/
 func (DaoBase *DaoBase) GetLists(po interface{}, table string, pk string, condition string, order string) map[string]interface{} {
 	var _fields = "*"
 	var _order = ""
@@ -110,18 +110,18 @@ func (DaoBase *DaoBase) GetLists(po interface{}, table string, pk string, condit
 }
 
 /**
-	SqlBuildConditon : 测试用例
-		var condi = make(map[string]map[string]interface{})
-		var inCodi = make(map[string]interface{})
-		var like = make(map[string]interface{})
-		like["name"] = "Bill"
-		inCodi["type"] = 1
-		inCodi["title"] = "yang"
-		condi["AND"] = inCodi
-		condi["LIKE"] = like
-		fmt.Print(ConditionBuild(condi))
-	author ： Bill
- */
+SqlBuildConditon : 测试用例
+	var condi = make(map[string]map[string]interface{})
+	var inCodi = make(map[string]interface{})
+	var like = make(map[string]interface{})
+	like["name"] = "Bill"
+	inCodi["type"] = 1
+	inCodi["title"] = "yang"
+	condi["AND"] = inCodi
+	condi["LIKE"] = like
+	fmt.Print(ConditionBuild(condi))
+author ： Bill
+*/
 func (DaoBase *DaoBase) ConditionBuild(condi map[string]map[string]interface{}) string {
 	if len(condi) == 0 {
 		return ""

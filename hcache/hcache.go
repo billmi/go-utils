@@ -3,16 +3,15 @@
 */
 package hcache
 
-import ( 
-	"time"
+import (
 	"github.com/muesli/cache2go"
+	"time"
 )
 
 /**
-	base of  "github.com/muesli/cache2go"
-	Author : Not Mine
- */
-
+base of  "github.com/muesli/cache2go"
+Author : Not Mine
+*/
 
 type MyCache struct {
 	cache *cache2go.CacheTable

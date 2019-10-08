@@ -1,13 +1,13 @@
 package dtime
 
 import (
-	"time"
 	"strings"
+	"time"
 )
 
 /**
-    时间获取
-    @author Bill
+  时间获取
+  @author Bill
 */
 
 func GetNowDateTime() string {

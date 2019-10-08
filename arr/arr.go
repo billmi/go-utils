@@ -8,7 +8,6 @@ func Copy(dest []interface{}, src []interface{}) (result []interface{}) {
 	return
 }
 
-
 //删除数组
 func DeleteArray(src []interface{}, index int) (result []interface{}) {
 	result = append(src[:index], src[(index+1):]...)

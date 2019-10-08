@@ -1,8 +1,8 @@
 package pagenation
 
 import (
-	"math"
 	"fmt"
+	"math"
 )
 
 const LIST_ROWS = 15
@@ -10,7 +10,7 @@ const LIST_ROWS = 15
 /**
 	分页页面信息
     author Bill
- */
+*/
 func CommaPaginator(page int, listRow int, total int64) map[string]int {
 	totalpages := int(math.Ceil(float64(total) / float64(listRow)))
 	if page <= 0 {
@@ -26,7 +26,7 @@ func CommaPaginator(page int, listRow int, total int64) map[string]int {
 /**
 	分页页面信息
     author Bill
- */
+*/
 func Paginator(page int, listRow int, total int64) map[string]interface{} {
 	totalpages := int(math.Ceil(float64(total) / float64(listRow)))
 	if page <= 0 {
@@ -40,9 +40,9 @@ func Paginator(page int, listRow int, total int64) map[string]interface{} {
 }
 
 /**
-	页面计算(用于sql解析)
-	@author Bill
- */
+页面计算(用于sql解析)
+@author Bill
+*/
 func PagenationParse(page int, limitRow int) string {
 	pageInfo := map[string]int{
 		"starRow":  0,
@@ -62,9 +62,9 @@ func PagenationParse(page int, limitRow int) string {
 }
 
 /**
-	页面计算(开始于结束步长区间)
-	@author Bill
- */
+页面计算(开始于结束步长区间)
+@author Bill
+*/
 func PagenationStart(page int, limitRow int) int {
 	var start = 0
 	var _page = page

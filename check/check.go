@@ -3,7 +3,7 @@ package check
 import "regexp"
 
 /**
-    @author Bill
+  @author Bill
 */
 
 //手机号码检测
