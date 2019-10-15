@@ -9,13 +9,14 @@ import (
 
 /**
   时间获取
+  时间转换必须加入时区设置,请注意
   @author Bill
 */
 
 var (
 	randSeek = int64(1)
 	l        sync.Mutex
-	zone     = "CST"
+	zone     = "CST"    //时区
 )
 
 func TimeIntToDate(time_int int) string {
