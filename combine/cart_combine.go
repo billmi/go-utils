@@ -3,20 +3,19 @@ package combine
 import "strings"
 
 /**
-	笛卡尔组合
- */
+笛卡尔组合
+*/
 var defSep = "_"
 
-
 /**
-	笛卡尔组合
-	测试用例
-	cart := [][]string{
-		{"a1", "a2"},
-		{"b1", "b2"},
-	}
-	CartCombine(cart)
- */
+笛卡尔组合
+测试用例
+cart := [][]string{
+	{"a1", "a2"},
+	{"b1", "b2"},
+}
+CartCombine(cart)
+*/
 func CartCombine(data [][]string, sep string) []string {
 	var _sep = defSep
 	if sep != "" {
