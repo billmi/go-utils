@@ -40,6 +40,7 @@ func Get(apiURL string, params url.Values) (data string, e error) {
 
 /**
 	Get with TimeOut
+	Code == 200 则返回,其他请打印错误
 	第三个参数设置超时  单位:秒 【0:则默认两秒】
  */
 func SendGetWithTimeOut(apiUrl string, params url.Values, time_out int) (data string, e error) {
@@ -106,4 +107,30 @@ func Post(apiURL string, params url.Values) (data string, err error) {
 		return "", err
 	}
 	return string(res), nil
+}
+
+/**
+	Post with TimeOut
+	Code == 200 则返回,其他请打印错误
+	第三个参数设置超时  单位:秒 【0:则默认两秒】
+ */
+func SendPostWithTimeOut(apiUrl string, params url.Values, time_out int) (data string, e error) {
+	var (
+		err error
+		b   []byte
+	)
+	client := _httpClient(time_out)
+	resp, err := client.PostForm(apiUrl, params)
+	if err != nil || resp == nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return "", nil
+	}
+	if resp.Body != nil {
+		b, err = ioutil.ReadAll(resp.Body)
+		return string(b), nil
+	}
+	return "", err
 }
