@@ -16,7 +16,7 @@ const (
   Get
   @author Bill
 */
-func Get(apiURL string, params url.Values) (data string, e error) {
+func Get(apiURL string, params url.Values) (resData string, e error) {
 	var (
 		Url *url.URL
 		err error
@@ -43,7 +43,7 @@ func Get(apiURL string, params url.Values) (data string, e error) {
 	Code == 200 则返回,其他请打印错误
 	第三个参数设置超时  单位:秒 【0:则默认两秒】
  */
-func SendGetWithTimeOut(apiUrl string, params url.Values, time_out int) (data string, e error) {
+func SendGetWithTimeOut(apiUrl string, params url.Values, time_out int) (resData string, e error) {
 	var (
 		Url *url.URL
 		err error
@@ -96,7 +96,7 @@ func _httpClient(time_out int) http.Client {
 /**
 	网络请求POST
 */
-func Post(apiURL string, params url.Values) (data string, err error) {
+func Post(apiURL string, params url.Values) (resData string, err error) {
 	resp, err := http.PostForm(apiURL, params)
 	if err != nil {
 		return "", err
@@ -114,7 +114,7 @@ func Post(apiURL string, params url.Values) (data string, err error) {
 	Code == 200 则返回,其他请打印错误
 	第三个参数设置超时  单位:秒 【0:则默认两秒】
  */
-func SendPostWithTimeOut(apiUrl string, params url.Values, time_out int) (data string, e error) {
+func SendPostWithTimeOut(apiUrl string, params url.Values, time_out int) (resData string, e error) {
 	var (
 		err error
 		b   []byte

@@ -1,6 +1,9 @@
 package array
 
-import "strconv"
+import (
+	"strconv"
+	"strings"
+)
 
 //合并数组
 func MergeArray(dest []interface{}, src []interface{}) (result []interface{}) {
@@ -43,4 +46,28 @@ func ArrayInt2Str(data []int) []string {
 		arr = append(arr, strconv.Itoa(data[i]))
 	}
 	return arr
+}
+
+// str in string list
+func StrInArray(str string, data []string) bool {
+	if len(data) > 0 {
+		for _, row := range data {
+			if str == strings.TrimSpace(row) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// str in int list
+func IntInArray(num int, data []int) bool {
+	if len(data) > 0 {
+		for _, row := range data {
+			if num == row {
+				return true
+			}
+		}
+	}
+	return false
 }
