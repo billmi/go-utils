@@ -38,7 +38,7 @@ go 语言工具库
 | pagenation  |                           分页计算                           |                      |
 | prototools  |              protobuf转换map[string]interface{}              |                      |
 |    respo    |                     返回数据封装转字符串                     |                      |
-|   savelog   |     写文件日志,这里可以用其他包代替,次包只是用于调试使用     |                      |
+|   savelog   |     写文件日志,这里可以用其他包代替,此包只是用于调试使用[不依赖第三方包]     |                      |
 | serializing |                    字符串序列化与反序列化                    |                      |
 |    sign     |                         数据填充****                         |                      |
 |    task     |                           定时任务                           | 仔细看示例[收集整理] |
