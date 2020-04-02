@@ -6,12 +6,17 @@ import (
 
 /**
 	作者链接 : https://www.jianshu.com/p/de3782af0a3a
-		log.Println(CamelCase("AAAA"))
-		log.Println(CamelCase("IconUrl"))
-		log.Println(CamelCase("iconUrl"))
-		log.Println(CamelCase("parentId"))
-		log.Println(CamelCase("a9b9Ba"))
-		log.Println(CamelCase("_An"))
+	收集by Bill
+*/
+
+/**
+	大写驼峰转小写,使用 "_" 隔开
+	log.Println(CamelCase("AAAA"))
+	log.Println(CamelCase("IconUrl"))
+	log.Println(CamelCase("iconUrl"))
+	log.Println(CamelCase("parentId"))
+	log.Println(CamelCase("a9b9Ba"))
+	log.Println(CamelCase("_An"))
 
 	res : demo
 		 a_a_a_a
@@ -20,9 +25,7 @@ import (
 		 parent_id
 		 a9b9ba
 		 Xan
-	收集by Bill
-*/
-
+ */
 func CamelCase(s string) string {
 	if s == "" {
 		return ""
