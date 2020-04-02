@@ -8,6 +8,8 @@ import (
 
 /**
   Aes加解密
+  填充方式【最近会修改为支持两种】
+  收集
   @author Bill
 */
 
