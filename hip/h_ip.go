@@ -46,7 +46,7 @@ func Ip2long(ipstr string) uint32 {
 }
 
 // 获取本机网卡IP
-func getLocalIP() (ipv4 string, err error) {
+func GetLocalIP() (ipv4 string, err error) {
 	var (
 		addrs   []net.Addr
 		addr    net.Addr
