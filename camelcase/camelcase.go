@@ -5,27 +5,27 @@ import (
 )
 
 /**
-	作者链接 : https://www.jianshu.com/p/de3782af0a3a
-	收集by Bill
+作者链接 : https://www.jianshu.com/p/de3782af0a3a
+收集by Bill
 */
 
 /**
-	大写驼峰转小写,使用 "_" 隔开
-	log.Println(CamelCase("AAAA"))
-	log.Println(CamelCase("IconUrl"))
-	log.Println(CamelCase("iconUrl"))
-	log.Println(CamelCase("parentId"))
-	log.Println(CamelCase("a9b9Ba"))
-	log.Println(CamelCase("_An"))
+大写驼峰转小写,使用 "_" 隔开
+log.Println(CamelCase("AAAA"))
+log.Println(CamelCase("IconUrl"))
+log.Println(CamelCase("iconUrl"))
+log.Println(CamelCase("parentId"))
+log.Println(CamelCase("a9b9Ba"))
+log.Println(CamelCase("_An"))
 
-	res : demo
-		 a_a_a_a
-		 icon_url
-		 icon_url
-		 parent_id
-		 a9b9ba
-		 Xan
- */
+res : demo
+	 a_a_a_a
+	 icon_url
+	 icon_url
+	 parent_id
+	 a9b9ba
+	 Xan
+*/
 func CamelCase(s string) string {
 	if s == "" {
 		return ""
@@ -62,7 +62,6 @@ func CamelCase(s string) string {
 func isASCIIUpper(c byte) bool {
 	return 'A' <= c && c <= 'Z'
 }
-
 
 func isASCIIDigit(c byte) bool {
 	return '0' <= c && c <= '9'
