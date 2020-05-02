@@ -7,7 +7,7 @@ import (
 )
 
 /**
-  Aes加解密
+  Aes加解密 主要以CBC为主 【可适当修改】
   @author Bill
 */
 
