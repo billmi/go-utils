@@ -2,10 +2,10 @@ package httpsend
 
 import (
 	"io/ioutil"
+	"net"
 	"net/http"
 	"net/url"
 	"time"
-	"net"
 )
 
 const (
@@ -39,10 +39,10 @@ func Get(apiURL string, params url.Values) (resData string, e error) {
 }
 
 /**
-	Get with TimeOut
-	Code == 200 则返回,其他请打印错误
-	第三个参数设置超时  单位:秒 【0:则默认两秒】
- */
+Get with TimeOut
+Code == 200 则返回,其他请打印错误
+第三个参数设置超时  单位:秒 【0:则默认两秒】
+*/
 func SendGetWithTimeOut(apiUrl string, params url.Values, time_out int) (resData string, e error) {
 	var (
 		Url *url.URL
@@ -94,7 +94,7 @@ func _httpClient(time_out int) http.Client {
 }
 
 /**
-	网络请求POST
+网络请求POST
 */
 func Post(apiURL string, params url.Values) (resData string, err error) {
 	resp, err := http.PostForm(apiURL, params)
@@ -110,10 +110,10 @@ func Post(apiURL string, params url.Values) (resData string, err error) {
 }
 
 /**
-	Post with TimeOut
-	Code == 200 则返回,其他请打印错误
-	第三个参数设置超时  单位:秒 【0:则默认两秒】
- */
+Post with TimeOut
+Code == 200 则返回,其他请打印错误
+第三个参数设置超时  单位:秒 【0:则默认两秒】
+*/
 func SendPostWithTimeOut(apiUrl string, params url.Values, time_out int) (resData string, e error) {
 	var (
 		err error
