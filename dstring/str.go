@@ -1,5 +1,10 @@
 package dstring
 
+
+import "unsafe"
+
+
+
 //反转字符串
 func Reverse(s string) string {
 	r := []rune(s)
@@ -8,3 +13,15 @@ func Reverse(s string) string {
 	}
 	return string(r)
 }
+
+//字节转字符串
+func BytesToString(data []byte) string{
+	return *(*string)(unsafe.Pointer(&data))
+}
+
+//字符串转字节数组
+func StringToBytes(data string) []byte {
+	return *(*[]byte)(unsafe.Pointer(&data))
+}
+
+
