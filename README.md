@@ -23,7 +23,7 @@ go 语言工具库
 |    djson    |                     实现json字符串互转,                      |                      |
 |    dmd5     |                           md5加密                            |                      |
 |    drand    |                      随机数/字符串生成                       |                      |
-|   dstring   |                          反转字符串,字符串 <=> 字节互转      |                      |
+|   dstring   |    反转字符串,字符串 <=> 字节互转,字符串是否为中文             |                      |
 |    dtime    |    处理时间获取比如获取时间戳,时间日期,顺带处理时区的问题    |                      |
 |    emoji    |                 Emoji表情解码,Emoji表情转换                  |                      |
 |   errors    |                    错误处理,抛出打印处理                     | 使用需要参考测试文件 |
@@ -34,6 +34,7 @@ go 语言工具库
 |  helastic   |                          es基本操作                          |       收集整理       |
 |     hip     |                      返回远程客户端的ip                      |                      |
 |  hreflect   |                          获取函数名                          |                      |
+|    hsort    | 这里主要是实现sort string接口排序,其他类型可参照文档实现       |                      |
 |    hsrsa    |                      rsa公私密钥加解密                       |                      |
 |  httpsend   |                     Get,Post请求发送处理                     |                      |
 | pagenation  |                           分页计算                           |                      |

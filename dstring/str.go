@@ -1,7 +1,9 @@
 package dstring
 
-
-import "unsafe"
+import (
+	"regexp"
+	"unsafe"
+)
 
 
 
@@ -22,6 +24,12 @@ func BytesToString(data []byte) string{
 //字符串转字节数组
 func StringToBytes(data string) []byte {
 	return *(*[]byte)(unsafe.Pointer(&data))
+}
+
+//判断字符串是否为中文[精确度需要反复试验]
+func IsContainCN(str string) bool {
+	var hzRegexp = regexp.MustCompile("[\u4e00-\u9fa5]+")
+	return hzRegexp.MatchString(str)
 }
 
 
