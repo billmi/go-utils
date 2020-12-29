@@ -31,7 +31,7 @@ go 语言工具库
 | floatformat |        浮点数与浮点字符串转换,尤其支持保留位填充方式         |                      |
 |   hbase64   |                       baseDecodeString                       |                      |
 |   hcache    |                           内存缓存                           |       收集整理       |
-|  helastic   |              es基本操作,curd,es版本6.8.0                    |   收集整理,适当调整改版 |
+|  helastic   |              es基本操作,curd,es版本6.8.0                     |   收集整理,适当调整改版 |
 |     hip     |                      返回远程客户端的ip                      |                      |
 |  hreflect   |                          获取函数名                          |                      |
 |    hsort    | 这里主要是实现sort string接口排序,其他类型可参照文档实现       |                      |
