@@ -1,4 +1,4 @@
-package main
+package helastic
 
 import (
 	"fmt"
@@ -6,9 +6,10 @@ import (
 	Mi "helastic/myelastic"
 	"log"
 	"time"
+	"testing"
 )
 
-var vHost = "http://127.0.0.1:9200/"
+
 
 // Tweet is a structure used for serializing/deserializing data in Elasticsearch.
 type Tweet struct {
@@ -26,44 +27,47 @@ type Tweet struct {
 
 const mapping = `
 {
-	"settings":{
-		"number_of_shards": 1,
-		"number_of_replicas": 0
-	},
-	"mappings":{
-		"tweet":{
-			"properties":{
-				"user":{
-					"type":"keyword"
-				},
-				"message":{
-					"type":"text",
-					"store": true,
-					"fielddata": true
-				},
-				"image":{
-					"type":"keyword"
-				},
-				"created":{
-					"type":"date"
-				},
-				"tags":{
-					"type":"keyword"
-				},
-				"location":{
-					"type":"geo_point"
-				},
-				"suggest_field":{
-					"type":"completion"
-				}
-			}
-		}
-	}
+    "settings":{
+        "number_of_shards": 1,
+        "number_of_replicas": 0
+    },
+    "mappings":{
+        "tweet":{
+            "properties":{
+                "user":{
+                    "type":"keyword"
+                },
+                "message":{
+                    "type":"text",
+                    "store": true,
+                    "fielddata": true
+                },
+                "image":{
+                    "type":"keyword"
+                },
+                "created":{
+                    "type":"date"
+                },
+                "tags":{
+                    "type":"keyword"
+                },
+                "location":{
+                    "type":"geo_point"
+                },
+                "suggest_field":{
+                    "type":"completion"
+                }
+            }
+        }
+    }
 }`
 
-// base on   github.com/olivere/elastic
 
-func main() {
+//Demo code
+func Test_test(t *testing.T) {
+
+	var vHost = "http://127.0.0.1:9200/"
+
 	es := Mi.OnInitES(vHost)
 	if es.Err != nil {
 		log.Println(es.Err)
