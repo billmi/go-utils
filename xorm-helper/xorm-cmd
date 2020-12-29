@@ -1,0 +1,2 @@
+#xorm 生成后copy to => xorm-helper\example\models
+xorm.exe reverse mysql root:root@(127.0.0.1:3306)/demo?charset-utf8 templates/goxorm

@@ -5,6 +5,7 @@ import (
 	"github.com/billmi/xorm-helper"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
+	"go-utils/xorm-helper/example/models"
 	"log"
 	"time"
 )
@@ -56,7 +57,7 @@ func main() {
 		The demo : Only Demo
 		You can create the model by reverse.
 	*/
-	var _model = XXModel{}
+	var _model = models.Test{}
 	has, err := engine.Where(condi).Get(&_model)
 	if err != nil {
 		log.Fatal(err.Error())
