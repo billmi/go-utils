@@ -1,81 +1,40 @@
 package pagenation
 
 import (
-	"fmt"
 	"math"
 )
 
-const LIST_ROWS = 15
+const (
+	TOTAL_PAGE_FIELD   = "total_page"
+	PAGE_FIELD         = "page"
+	ROWS_FIELD         = "rows"
+	TOTAL_RECORD_FIELD = "total_record"
+)
 
 /**
-	分页页面信息
+	page 当前页
+	listRow 每页行数
+    total   数据总数
+
+	分页数据填充 返回
+		=> map[string]int
+			["total_page"] => 1,
+			["page"] => 1,
+			["rows"] => 20,
+			["total_record"] => 3,
     author Bill
 */
-func CommaPaginator(page int, listRow int, total int64) map[string]int {
+func CommaPaginator(page int, listRow int, total int) map[string]int {
 	totalpages := int(math.Ceil(float64(total) / float64(listRow)))
 	if page <= 0 {
 		page = 1
 	}
 	paginator := make(map[string]int)
-	paginator["total_page"] = totalpages
-	paginator["curr_page"] = page
-	paginator["page_rows"] = listRow
+	paginator[TOTAL_PAGE_FIELD] = totalpages
+	paginator[PAGE_FIELD] = page
+	paginator[ROWS_FIELD] = listRow
+	paginator[TOTAL_RECORD_FIELD] = total
 	return paginator
 }
 
-/**
-	分页页面信息
-    author Bill
-*/
-func Paginator(page int, listRow int, total int64) map[string]interface{} {
-	totalpages := int(math.Ceil(float64(total) / float64(listRow)))
-	if page <= 0 {
-		page = 1
-	}
-	paginatorMap := make(map[string]interface{})
-	paginatorMap["totalPage"] = totalpages
-	paginatorMap["currpage"] = page
-	paginatorMap["listRow"] = listRow
-	return paginatorMap
-}
 
-/**
-页面计算(用于sql解析)
-@author Bill
-*/
-func PagenationParse(page int, limitRow int) string {
-	pageInfo := map[string]int{
-		"starRow":  0,
-		"limitRow": limitRow,
-	}
-	var _page = page
-	if _page <= 0 {
-		_page = 1
-	}
-	switch _page {
-	case 1:
-		return fmt.Sprintf("LIMIT %d,%d", pageInfo["starRow"], pageInfo["limitRow"])
-	default:
-		pageInfo["starRow"] = (page - 1) * limitRow
-	}
-	return fmt.Sprintf("LIMIT %d,%d", pageInfo["starRow"], pageInfo["limitRow"])
-}
-
-/**
-页面计算(开始于结束步长区间)
-@author Bill
-*/
-func PagenationStart(page int, limitRow int) int {
-	var start = 0
-	var _page = page
-	if _page <= 0 {
-		_page = 1
-	}
-	switch _page {
-	case 1:
-		start = 0
-	default:
-		start = (page - 1) * limitRow
-	}
-	return start
-}
