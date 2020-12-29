@@ -1,21 +1,18 @@
-package helastic
+package myelastic
 
 import (
 	"context"
 	"encoding/json"
-	"errors"
-	"github.com/olivere/elastic"
+	"helastic/myelastic/errors"
 	"log"
+
+
 	"reflect"
 	"strings"
 	"time"
+
+	"github.com/olivere/elastic"
 )
-
-/**
-base of :  github.com/olivere/elastic
-
-Author : Not Mine...
-*/
 
 //
 type MyElastic struct {
@@ -28,7 +25,7 @@ type MyElastic struct {
 func OnInitES(url string) MyElastic {
 	var es MyElastic
 	es.Ctx = context.Background()
-	es.Client, es.Err = elastic.NewClient(elastic.SetURL(url))
+	es.Client, es.Err = elastic.NewClient(elastic.SetURL(url),elastic.SetSniff(false))
 	if es.Err != nil {
 		log.Println(es.Err)
 		//mylog.Error(es.Err)
@@ -103,14 +100,18 @@ func (es *MyElastic) SortQuery(index_name string, builder []elastic.Sorter, quer
 		log.Println(es.Err)
 		return false, nil
 	}
-	//log.Println("Found a total of %d entity\n", es_result.TotalHits())
-
-	if es_result.Hits.TotalHits.Value > 0 {
-		var result []string
+	
+	var result = make([]string, 0)
+	if es_result.Hits.TotalHits > 0 {
 		//log.Println("Found a total of %d entity\n", searchResult.Hits.TotalHits)
 		for _, hit := range es_result.Hits.Hits {
-
-			result = append(result, string(hit.Source))
+			_s, err := hit.Source.MarshalJSON()
+			if err != nil {
+				log.Println(es.Err)
+				return true, result
+			}
+			//result = append(result, string(hit.Source))
+			result = append(result, string(_s))
 
 		}
 		return true, result
@@ -152,7 +153,7 @@ func (es *MyElastic) SortQueryReturnHits(index_name string, from, size int, buil
 	}
 
 	//	log.Println("wwwwww", es_result.Aggregations)
-	if es_result.Hits.TotalHits.Value > 0 {
+	if es_result.Hits.TotalHits > 0 {
 
 		return true, es_result.Hits.Hits
 	} else {
@@ -203,18 +204,16 @@ out *[]Param //查询结果
 */
 func (es *MyElastic) SearchMap(index_name, type_name string, query interface{}, out *[]map[string]interface{}) (result bool) {
 	es_search := es.Client.Search()
-	if len(type_name) > 0 {
-		es_search = es_search.Type(type_name)
-	}
-	if len(index_name) > 0 {
-		es_search = es_search.Index(index_name)
+	if index_name == "" || type_name == "" {
+		return false
 	}
 	var es_result *elastic.SearchResult
-	es_result, es.Err = es_search.Source(query).Do(es.Ctx)
+	es_result, es.Err = es_search.Index(index_name).Type(type_name).Source(query).Do(es.Ctx)
 	if es.Err != nil {
 		log.Println(es.Err)
 		return false
 	}
+
 	if es_result.Hits == nil {
 		log.Println(errors.New("expected SearchResult.Hits != nil; got nil"))
 		return false
@@ -222,7 +221,11 @@ func (es *MyElastic) SearchMap(index_name, type_name string, query interface{}, 
 
 	for _, hit := range es_result.Hits.Hits {
 		tmp := make(map[string]interface{})
-		err := json.Unmarshal(hit.Source, &tmp)
+		_b, err := hit.Source.MarshalJSON()
+		if err != nil {
+			log.Println(es.Err)
+		}
+		err = json.Unmarshal(_b, &tmp)
 		if err != nil {
 			log.Println(es.Err)
 		} else {
@@ -270,24 +273,53 @@ func (es *MyElastic) Search(index_name, type_name string, query interface{}, out
 
 	for _, hit := range es_result.Hits.Hits {
 		newValue := reflect.New(sliceElementType)
-
 		item := make(map[string]interface{})
-		err := json.Unmarshal(hit.Source, &item)
-		//fmt.Println(string(*hit.Source))
-
-		err = scanMapIntoStruct(newValue.Interface(), item)
+		_b, err := hit.Source.MarshalJSON()
 		if err != nil {
 			log.Println(err)
 		}
-
+		err = json.Unmarshal(_b, &item)
+		err = scanMapIntoStruct(newValue.Interface(), item)
 		if err != nil {
 			log.Println(err)
+			return false
 		} else {
 			sliceValue.Set(reflect.Append(sliceValue, reflect.Indirect(reflect.ValueOf(newValue.Interface()))))
 			//out = append(out, tmp)
 		}
 	}
 
+	return true
+}
+
+func (es *MyElastic) UpdateValues(index_name string, type_name string, pk string, doc interface{}) bool {
+	es_update := es.Client.Update()
+	if len(type_name) > 0 {
+		es_update = es_update.Type(type_name)
+	}
+	if len(index_name) > 0 {
+		es_update = es_update.Index(index_name)
+	}
+	if len(pk) > 0 {
+		es_update = es_update.Id(pk)
+	}
+
+	_, es.Err = es_update.Doc(doc).Do(es.Ctx)
+	if es.Err != nil {
+		return false
+	}
+	return true
+}
+
+//删除索引
+func (es *MyElastic) DelIndex(index_name string) bool {
+	deleteIndex, err := es.Client.DeleteIndex(index_name).Do(es.Ctx)
+	if err != nil {
+		return false
+	}
+	if !deleteIndex.Acknowledged {
+		return false
+	}
 	return true
 }
 
