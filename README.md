@@ -37,7 +37,7 @@ go 语言工具库
 |    hsort    | 这里主要是实现sort string接口排序,其他类型可参照文档实现       |                      |
 |    hsrsa    |                      rsa公私密钥加解密                       |                      |
 |  httpsend   |                     Get,Post请求发送处理                     |                      |
-| pagenation  |                           分页计算                           |                      |
+| pagenation  |          总数据,每页显示,当前页数返回总页数信息,附:Mysql偏移Sql语句生成  |                      |
 | prototools  |              protobuf转换map[string]interface{}              |                      |
 |    respo    |                     返回数据封装转字符串                     |                      |
 |   savelog   | 写文件日志,这里可以用其他包代替,此包只是用于调试使用[不依赖第三方包] |                      |
