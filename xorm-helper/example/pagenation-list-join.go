@@ -73,8 +73,8 @@ func main() {
 
 	//Can Get PageInfo
 	fmt.Printf("\r\n total_page : %d \r\n", pageListInfo["total_page"])
-	fmt.Printf("\r\n curr_page : %d \r\n", pageListInfo["curr_page"])
-	fmt.Printf("\r\n page_rows : %d \r\n", pageListInfo["page_rows"])
+	fmt.Printf("\r\n page : %d \r\n", pageListInfo["page"])
+	fmt.Printf("\r\n rows : %d \r\n", pageListInfo["rows"])
 	fmt.Printf("\r\n total_record : %d \r\n", pageListInfo["total_record"])
 
 	//Data in po
