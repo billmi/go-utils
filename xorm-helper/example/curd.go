@@ -1,19 +1,18 @@
 package main
 
 import (
+	"fmt"
+	"github.com/billmi/xorm-helper"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
-	"github.com/billmi/xorm-helper"
-	"fmt"
-	"time"
 	"log"
+	"time"
 )
 
-
 /**
-	基于xorm
-	增删改查操作demo
- */
+基于xorm
+增删改查操作demo
+*/
 func main() {
 
 	engine, err := xorm.NewEngine("mysql",
@@ -44,7 +43,7 @@ func main() {
 			"update_time":      currTime,
 		}
 	)
-	//insert
+	//insert 这里会做常规类型判断转化 只支持 float32,64 || int32 ,64 || String 可以自己扩展
 	XormHelper.InsertRow(tableName, inSertData)
 
 	//Edit
@@ -53,6 +52,7 @@ func main() {
 
 	/*
 		Search base on XormEngine
+		使用xorm生成的model结构体
 		The demo : Only Demo
 		You can create the model by reverse.
 	*/

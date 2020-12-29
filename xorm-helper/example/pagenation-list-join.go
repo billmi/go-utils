@@ -12,8 +12,8 @@ import (
 	author : Bill
  */
 
-//
-type DeviceOauthLogPo struct {
+// fields map struct
+type Po1 struct {
 	DeviceType         int    `json:"device_type"`
 	DeviceTypeName     string `json:"device_type_name"`
 	DeviceTypeTitle    string `json:"device_type_title"`
@@ -21,8 +21,8 @@ type DeviceOauthLogPo struct {
 	DeviceScreenHeight int    `json:"device_screen_height"`
 }
 
-
-type DeviceOauthLogPo1 struct {
+// fields map struct
+type Po2 struct {
 	DeviceType         int    `json:"device_type"`
 	DeviceTypeName     string `json:"device_type_name"`
 	DeviceTypeTitle    string `json:"device_type_title"`
@@ -42,7 +42,7 @@ func main() {
 		XormHelper = xormhelper.XormHelper{}
 
 		//Use Data po struct, po <=> fields
-		po = []*DeviceOauthLogPo1{}
+		po = []*Po2{}
 
 		//if not join  can be set empty string  => ""
 		po1Join = [][]string{
