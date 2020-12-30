@@ -48,11 +48,23 @@ func ArrayInt2Str(data []int) []string {
 	return arr
 }
 
+// str[TrimSpace] in string list
+func TrimSpaceStrInArray(str string, data []string) bool {
+	if len(data) > 0 {
+		for _, row := range data {
+			if str == strings.TrimSpace(row) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 // str in string list
 func StrInArray(str string, data []string) bool {
 	if len(data) > 0 {
 		for _, row := range data {
-			if str == strings.TrimSpace(row) {
+			if str == row {
 				return true
 			}
 		}
