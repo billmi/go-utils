@@ -22,7 +22,7 @@ func DeleteArray(src []interface{}, index int) (result []interface{}) {
 // []string => []int
 func ArrayStr2Int(data []string) []int {
 	var (
-		arr = make([]int, 0)
+		arr = make([]int, 0, len(data))
 	)
 	if len(data) == 0 {
 		return arr
@@ -37,7 +37,7 @@ func ArrayStr2Int(data []string) []int {
 // []int => []string
 func ArrayInt2Str(data []int) []string {
 	var (
-		arr = make([]string, 0)
+		arr = make([]string, 0, len(data))
 	)
 	if len(data) == 0 {
 		return arr
