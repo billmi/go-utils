@@ -36,7 +36,7 @@ go 语言工具库
 |  hreflect   |                          获取函数名                          |                      |
 |    hsort    | 这里主要是实现sort string接口排序,其他类型可参照文档实现       |                      |
 |    hsrsa    |                      rsa公私密钥加解密                       |                      |
-|  httpsend   |                     Get,Post请求发送处理                     |                      |
+|  httpsend   | Get,Post请求发送处理,json RPC2.0 用于filecoin Rpc Api             |                      |
 | pagenation  |          总数据,每页显示,当前页数返回总页数信息,附:Mysql偏移Sql语句生成  |                      |
 | prototools  |              protobuf转换map[string]interface{}              |                      |
 |    respo    |                     返回数据封装转字符串                     |                      |
