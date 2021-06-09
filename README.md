@@ -3,10 +3,11 @@ go 语言工具库
 工具库大部分不依赖第三方包,按目录文件分包管理 
 
 ### 文档
-
 [![GitHub stars](https://img.shields.io/github/stars/billmi/go-utils)](https://github.com/billmi/go-utils/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/billmi/go-utils)](https://github.com/billmi/go-utils/network)
 [![GitHub license](https://img.shields.io/github/license/billmi/go-utils)](https://github.com/billmi/go-utils/blob/master/LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/billmi/go-utils)](https://goreportcard.com/report/github.com/billmi/go-utils)
+<a href=""><img src="https://img.shields.io/badge/golang-%3E%3D1.15.5-blue.svg" /></a>
 
 ---------------------------------------------------------------------------------------------------------------------------------
 
