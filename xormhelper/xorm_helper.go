@@ -3,37 +3,41 @@ package xormhelper
 import (
 	"fmt"
 	"reflect"
-	"strings"
-	"github.com/go-xorm/xorm"
-	"strconv"
 	"sort"
+	"strconv"
+	"strings"
 )
 
-/**
-	Struct XormHelper
-    author : Bill
- */
+/*
+*
+
+		Struct XormHelper
+	    author : Bill
+*/
 type XormHelper struct {
 	Datasource *xorm.Engine
 }
 
-/**
-	GetDatasource
- */
+/*
+*
+GetDatasource
+*/
 func (xormhelper *XormHelper) GetDatasource() *xorm.Engine {
 	return xormhelper.Datasource
 }
 
-/**
-	SetDatasource
- */
+/*
+*
+SetDatasource
+*/
 func (xormhelper *XormHelper) SetDatasource(datasource *xorm.Engine) {
 	xormhelper.Datasource = datasource
 }
 
-/**
-	PageList to po
- */
+/*
+*
+PageList to po
+*/
 func (xormhelper *XormHelper) GetPageLists(po interface{}, table string, fields string, pk string, alias string, join string, condition string, order string, group string, page int, listRow int) map[string]interface{} {
 	var (
 		_fields  = "*"
@@ -47,8 +51,8 @@ func (xormhelper *XormHelper) GetPageLists(po interface{}, table string, fields 
 		_listRow = LIST_ROWS
 		querySql string
 		countSql string
-		resData = make(map[string]interface{}, 0)
-		pageInfo = make(map[string]int,0)
+		resData  = make(map[string]interface{}, 0)
+		pageInfo = make(map[string]int, 0)
 	)
 	if pk != "" {
 		_pk = pk
@@ -89,7 +93,7 @@ func (xormhelper *XormHelper) GetPageLists(po interface{}, table string, fields 
 	} else {
 		resData["list"] = make([]int, 0)
 	}
-	pageInfo = CommaPaginator(_page, listRow, int64(count))
+	pageInfo = CommaPaginator(_page, listRow, count)
 	resData["total_page"] = pageInfo["total_page"]
 	resData["curr_page"] = pageInfo["curr_page"]
 	resData["page_rows"] = pageInfo["page_rows"]
@@ -97,19 +101,20 @@ func (xormhelper *XormHelper) GetPageLists(po interface{}, table string, fields 
 	return resData
 }
 
-/**
-	List to po
- */
+/*
+*
+List to po
+*/
 func (xormhelper *XormHelper) GetLists(po interface{}, table string, fields string, pk string, alias string, join string, condition string, order string, group string) map[string]interface{} {
 	var (
-		_fields = "*"
-		_order = ""
+		_fields  = "*"
+		_order   = ""
 		orderCmd = " ORDER BY "
-		groupBy = " GROUP BY "
-		_group = ""
-		_pk = "`id`"
+		groupBy  = " GROUP BY "
+		_group   = ""
+		_pk      = "`id`"
 		querySql string
-		resData = make(map[string]interface{}, 0)
+		resData  = make(map[string]interface{}, 0)
 	)
 	if pk != "" {
 		_pk = pk
@@ -135,18 +140,21 @@ func (xormhelper *XormHelper) GetLists(po interface{}, table string, fields stri
 	return resData
 }
 
-/**
-	Test Demo
+/*
+*
+Test Demo
+
 	var data = [][]string{
 		{"INNER","b b","b.id = a.id"},
 		{"INNER","c c","c.id = b.id"},
 	}
-	var base = &DaoBase{}
-	fmt.Print(base.ConditionJoin(data))
 
-	Join Builder
-	author : Bill
- */
+var base = &DaoBase{}
+fmt.Print(base.ConditionJoin(data))
+
+Join Builder
+author : Bill
+*/
 func (xormhelper *XormHelper) ConditionJoin(join [][]string) string {
 	var _join = ""
 	for _, row := range join {
@@ -167,27 +175,28 @@ func (xormhelper *XormHelper) ConditionJoin(join [][]string) string {
 	return _join
 }
 
-/**
-	SqlBuildConditon : Test Demo
-	var condi = make(map[string]map[string]interface{})
-	var inCodi = make(map[string]interface{})
-	var like = make(map[string]interface{})
-	var null = make(map[string]interface{})        // null
-	var or = make(map[string]interface{},0)
+/*
+*
+SqlBuildConditon : Test Demo
+var condi = make(map[string]map[string]interface{})
+var inCodi = make(map[string]interface{})
+var like = make(map[string]interface{})
+var null = make(map[string]interface{})        // null
+var or = make(map[string]interface{},0)
 
-	orCondi["condi"]  = fmt.Sprintf("bc.status = %d",0)
-	nullCondi["bc.cv_id"] = nil
-	like["name"] = "Bill"
-	inCodi["type"] = 1
-	inCodi["title"] = "young"
-	condi["AND"] = inCodi
-	condi["LIKE"] = like
-	condi["OR"] = or
-	condi["NULL"] = null
-	fmt.Print(ConditionBuild(condi))
-	Condition Builder
-	author ： Bill
- */
+orCondi["condi"]  = fmt.Sprintf("bc.status = %d",0)
+nullCondi["bc.cv_id"] = nil
+like["name"] = "Bill"
+inCodi["type"] = 1
+inCodi["title"] = "young"
+condi["AND"] = inCodi
+condi["LIKE"] = like
+condi["OR"] = or
+condi["NULL"] = null
+fmt.Print(ConditionBuild(condi))
+Condition Builder
+author ： Bill
+*/
 func (xormhelper *XormHelper) ConditionBuild(condi map[string]map[string]interface{}) string {
 	if len(condi) == 0 {
 		return ""
@@ -232,18 +241,20 @@ func (xormhelper *XormHelper) ConditionBuild(condi map[string]map[string]interfa
 	return _condi
 }
 
-/**
-	find by po Struct
- */
+/*
+*
+find by po Struct
+*/
 func (xormhelper *XormHelper) GetByPo(po interface{}, table string, condi string) interface{} {
 	var handler = xormhelper.GetDatasource()
 	handler.SQL("SELECT * FROM " + table + " WHERE 1 " + condi).Find(po)
 	return po
 }
 
-/**
-	Editor Rows && Return effect rows
- */
+/*
+*
+Editor Rows && Return effect rows
+*/
 func (xormhelper *XormHelper) EditRow(table string, condi string, params map[string]interface{}) int {
 	var handler = xormhelper.GetDatasource()
 	effRow, err := handler.Table(table).Where(condi).Update(params)
@@ -257,9 +268,10 @@ func (xormhelper *XormHelper) EditRow(table string, condi string, params map[str
 	return int(effRow)
 }
 
-/**
-	Insert row  && 	Return new InsertId
- */
+/*
+*
+Insert row  && 	Return new InsertId
+*/
 func (xormhelper *XormHelper) InsertRow(table string, params map[string]interface{}) (int, bool) {
 	if len(params) == 0 {
 		return 0, false
@@ -296,7 +308,7 @@ func (xormhelper *XormHelper) InsertRow(table string, params map[string]interfac
 	return int(nId), true
 }
 
-//Get Trans Stat
+// Get Trans Stat
 func (xormhelper *XormHelper) StartTransaction() *xorm.Session {
 	var handler = xormhelper.GetDatasource()
 	return handler.NewSession()

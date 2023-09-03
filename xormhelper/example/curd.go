@@ -5,12 +5,13 @@ import (
 	"github.com/billmi/xorm-helper"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
-	"go-utils/xorm-helper/example/models"
 	"log"
 	"time"
+	"xormhelper/example/models"
 )
 
-/**
+/*
+*
 基于xorm
 增删改查操作demo
 */

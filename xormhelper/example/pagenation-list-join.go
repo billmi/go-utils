@@ -1,16 +1,16 @@
 package main
 
 import (
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/go-xorm/xorm"
 	"fmt"
-	"github.com/billmi/xorm-helper"
+	_ "github.com/go-sql-driver/mysql"
+	"xorm.io/xorm"
+	"xormhelper"
 )
 
 /**
-	datetime : 2019-09-30 18:18:18
-	author : Bill
- */
+datetime : 2019-09-30 18:18:18
+author : Bill
+*/
 
 // fields map struct
 type Po1 struct {
@@ -60,7 +60,7 @@ func main() {
 		order     = "a.id DESC"
 		alias     = "a" // alisa a
 		pk        = "a.id"
-		tableName = "test"  // tablename => test
+		tableName = "test" // tablename => test
 
 		//field Select , if you have custom ,you can set the Po by yourself
 		fields = "a.*,b.title"
